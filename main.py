@@ -34,12 +34,12 @@ def blits():
     screen.blit(snail_surface, (snail_x_pos, snail_y_pos))
 
 # Surfaces
-sky_surface = pygame.image.load("graphics/Sky.png")
-ground_surface = pygame.image.load("graphics/Ground.png")
+sky_surface = pygame.image.load("graphics/Sky.png").convert()
+ground_surface = pygame.image.load("graphics/Ground.png").convert()
 text_surface = font.render("My game", False, "Black")
 
 # Player + Bots (Moving Surfaces)
-snail_surface = pygame.image.load("graphics/snail/snail1.png")
+snail_surface = pygame.image.load("graphics/snail/snail1.png").convert()
 
 # While loop while the game is running
 while True:
