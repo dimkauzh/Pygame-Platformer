@@ -15,9 +15,11 @@ clock = pygame.time.Clock()
 # Font
 font = pygame.font.Font("font/Pixeltype.ttf", 50)
 
-# Snail position
+# Positions
 snail_x_pos = 600
 snail_y_pos = 265
+player_x_pos = 80
+player_y_pos = 300
 
 # For stopping game(Moving)Surfaces
 def kill():
@@ -32,14 +34,19 @@ def blits():
     screen.blit(ground_surface, (0, 300))
     screen.blit(text_surface, (300, 50))
     screen.blit(snail_surface, (snail_x_pos, snail_y_pos))
+    screen.blit(player_surface, (player_rect))
 
 # Surfaces
 sky_surface = pygame.image.load("graphics/Sky.png").convert()
 ground_surface = pygame.image.load("graphics/Ground.png").convert()
 text_surface = font.render("My game", False, "Black")
 
-# Player + Bots (Moving Surfaces)
-snail_surface = pygame.image.load("graphics/snail/snail1.png").convert()
+# Player + Bots (Moving Surfaces) + Converted images
+player_surface = pygame.image.load("graphics/player/player_walk_1.png").convert_alpha()
+snail_surface = pygame.image.load("graphics/snail/snail1.png").convert_alpha()
+
+# Rectangles
+player_rect = player_surface.get_rect(midbottom = (player_x_pos, player_y_pos))
 
 # While loop while the game is running
 while True:
