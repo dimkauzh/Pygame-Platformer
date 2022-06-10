@@ -16,8 +16,9 @@ clock = pygame.time.Clock()
 font = pygame.font.Font("font/Pixeltype.ttf", 50)
 
 # Positions
+mouse_pos = pygame.mouse.get_pos()
 snail_x_pos = 600
-snail_y_pos = 265
+snail_y_pos = 300
 player_x_pos = 80
 player_y_pos = 300
 
@@ -33,8 +34,8 @@ def blits():
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
     screen.blit(text_surface, (300, 50))
-    screen.blit(snail_surface, (snail_x_pos, snail_y_pos))
-    screen.blit(player_surface, (player_rect))
+    screen.blit(snail_surface, snail_rect)
+    screen.blit(player_surface, player_rect)
 
 # Surfaces
 sky_surface = pygame.image.load("graphics/Sky.png").convert()
@@ -47,6 +48,7 @@ snail_surface = pygame.image.load("graphics/snail/snail1.png").convert_alpha()
 
 # Rectangles
 player_rect = player_surface.get_rect(midbottom = (player_x_pos, player_y_pos))
+snail_rect = snail_surface.get_rect(bottomright = (snail_x_pos, snail_y_pos))
 
 # While loop while the game is running
 while True:
@@ -56,11 +58,22 @@ while True:
     blits()
     
     # Moving the snail
-    snail_x_pos -= 3
+    snail_rect.x -= 3
     
     # Changes the direction that the snail goes
-    if snail_x_pos < -100:
-        snail_x_pos = 800
+    if snail_rect.right <= 0:
+        snail_rect.left = 800
+    
+    # Making player move
+    player_rect.left += 1
+    
+    # CollideRect
+    #if player_rect.colliderect(snail_rect):
+    #    print("Collision")
+    
+    #Collidepoint mouse
+    if player_rect.collidepoint(mouse_pos):
+        print("Collision")
     
     # Update display
     pygame.display.update()
